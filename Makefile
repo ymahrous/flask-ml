@@ -12,13 +12,9 @@ lint:
 	pylint --disable=R,C,W1203,E1101 mlib
 
 deploy:
-	docker login --username AWS --password-stdin amazonaws.com
+	docker login
 	docker build -t mlflask .
-	docker tag mlflask:latest /mlops:latest
-	docker push /mlops:latest
+	docker tag mlflask:latest ghcr.io/ymahrous/flask-ml:latest
+	docker push ghcr.io/ymahrous/flask-ml:latest
 	
-all: install lint test format
-
-#lint Dockerfile
-#docker run --rm -i hadolint/hadolint < Dockerfile
-#deploy
+all: install lint test format deploy

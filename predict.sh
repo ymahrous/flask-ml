@@ -3,7 +3,6 @@
 PORT=8080
 echo "Port: $PORT"
 
-# POST method predict
 curl -d '{  
    "Weight":200
 }'\
