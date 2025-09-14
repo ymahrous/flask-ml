@@ -39,5 +39,5 @@ def test_height_human():
 def test_index(app, client):
     res = client.get("/")
     assert res.status_code == 200
-    expected = "Predict the Height From Weight of MLB Players"
+    expected = {"message": "Predict the height From weight of MLB players"}
     assert expected in res.get_data(as_text=True)
