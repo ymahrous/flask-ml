@@ -1,4 +1,4 @@
-name: Python ML Microservice with Github Actions
+name: CI/CD with Github Actions
 on: [push]
 jobs:
   build:
