@@ -1,0 +1,11 @@
+scikit-learn
+pandas
+pylint
+pytest
+black
+click
+Flask
+markupsafe
+joblib
+pytest-cov
+requests

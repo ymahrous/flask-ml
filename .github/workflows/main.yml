@@ -1,0 +1,40 @@
+name: Python ML Microservice with Github Actions
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python3
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.12
+    - name: Install dependencies
+      run: |
+        make install
+    - name: Lint with pylint
+      run: |
+        make lint
+    - name: Test with PyTest
+      run: |
+        make test
+    - name: Format code
+      run: |
+        make format
+  
+  build-container:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Loging to Github registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.BUILDCONTAINERS }}
+    - name: build flask app
+      uses: docker/build-push-action@v2
+      with:
+        context: ./
+        tags: ghcr.io/ymahrous/flask-ml:latest
+        push: true
